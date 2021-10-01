@@ -39,7 +39,10 @@ class ServicioBorradorTest {
         final String CORREO = "n.diaz@ufromail.cl";
         final int EDAD = 20;
 
-        var persona = new Persona(NOMBRE, CORREO, EDAD);
+        var persona = new Persona();
+        persona.setNombre(NOMBRE);
+        persona.setCorreo(CORREO);
+        persona.setEdad(EDAD);
 
         Mockito.when(servicioBuscador.getPersonaPorID(ID))
                 .thenReturn(persona);

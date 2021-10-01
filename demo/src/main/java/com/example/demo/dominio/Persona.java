@@ -32,9 +32,4 @@ public class Persona {
     @Column(nullable = false)
     private Integer edad;
 
-    public Persona(String nombre, String correo, Integer edad) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.edad = edad;
-    }
 }

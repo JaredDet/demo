@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api")
 public class ControladorCalculadora {
 
-    ServicioCalculadora servicioCalculadora;
+    private final ServicioCalculadora servicioCalculadora;
 
     @Autowired
     public ControladorCalculadora(ServicioCalculadora servicioCalculadora) {

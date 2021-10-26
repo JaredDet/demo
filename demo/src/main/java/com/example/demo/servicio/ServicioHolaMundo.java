@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class ServicioHolaMundo {
 
     public String saludar(){
-        return "<h1>¡Hola, mundo!</h1>";
+        return "¡Hola, mundo!";
     }
 }

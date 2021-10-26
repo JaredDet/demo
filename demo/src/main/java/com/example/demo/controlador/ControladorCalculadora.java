@@ -34,4 +34,14 @@ public class ControladorCalculadora {
     public int dividir(@PathVariable int a, @PathVariable int b) {
         return servicioCalculadora.dividir(a, b);
     }
+
+    @GetMapping(value = "/potencia_cuadrada/{a}")
+    public double potenciarCuadrado(@PathVariable int a) {
+        return servicioCalculadora.potenciarCuadrado(a);
+    }
+
+    @GetMapping(value = "/potencia_nesima/{a}/{b}")
+    public double potenciarNesima(@PathVariable int a, @PathVariable int b) {
+        return servicioCalculadora.potenciarNesima(a, b);
+    }
 }

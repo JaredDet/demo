@@ -38,4 +38,32 @@ public class ServicioCalculadora {
         }
         return Math.pow(a, b);
     }
+
+    public double sacarInvMultiplicativo(int a){
+
+        if(a == 0){
+            throw new DivisionEntreCeroException();
+        }
+        return 1.0/a;
+    }
+
+    public double sacarRaiz(int a){
+
+        if(a < 0){
+            throw new EntradaNoValidaException();
+        }
+        return Math.sqrt(a);
+    }
+
+    public int sacarModulo(int a, int b){
+
+        if(b == 0){
+            throw new DivisionEntreCeroException();
+        }
+
+        if(a < 0 || b < 0){
+            throw new EntradaNoValidaException();
+        }
+        return a % b;
+    }
 }

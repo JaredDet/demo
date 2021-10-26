@@ -25,6 +25,7 @@ class ServicioCalculadoraTest {
     final static int NUMERO_5 = 5;
     final static int NUMERO_2 = 2;
     final static int NUMERO_0 = 0;
+    final static int NUMERO_4 = 4;
     final static int NUMERO_NEGATIVO = -1;
 
     @Test
@@ -61,6 +62,7 @@ class ServicioCalculadoraTest {
         assertThrows(DivisionEntreCeroException.class,
                 () -> servicioCalculadora.dividir(NUMERO_5, NUMERO_0));
     }
+
     @Test
     @DisplayName("Test caso cinco al cuadrado")
     void potenciarCuadrado() {
@@ -81,10 +83,67 @@ class ServicioCalculadoraTest {
         var resultado = servicioCalculadora.potenciarNesima(NUMERO_0, NUMERO_0);
         assertEquals(1, resultado);
     }
+
     @Test
     @DisplayName("Test caso cero potenciado a negativo")
     void potenciarCeroNegativo() {
         assertThrows(EntradaNoValidaException.class,
                 () -> servicioCalculadora.potenciarNesima(NUMERO_0, NUMERO_NEGATIVO));
+    }
+
+    @Test
+    @DisplayName("Test inverso multiplicativo de cuatro")
+    void sacarInvMultiplicativo() {
+        var resultado = servicioCalculadora.sacarInvMultiplicativo(NUMERO_4);
+        assertEquals(0.25, resultado);
+    }
+
+    @Test
+    @DisplayName("Test inverso multiplicativo de cero")
+    void sacarInvMultiplicativoCero() {
+        assertThrows(DivisionEntreCeroException.class,
+                () -> servicioCalculadora.sacarInvMultiplicativo(NUMERO_0));
+    }
+
+    @Test
+    @DisplayName("Test caso raíz positiva")
+    void sacarRaiz() {
+        var resultado = servicioCalculadora.sacarRaiz(NUMERO_4);
+        assertEquals(2.0, resultado);
+    }
+
+    @Test
+    @DisplayName("Test caso raíz base negativa")
+    void sacarRaizNegativa() {
+        assertThrows(EntradaNoValidaException.class,
+                () -> servicioCalculadora.sacarRaiz(NUMERO_NEGATIVO));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre cinco y dos")
+    void sacarModulo() {
+        var resultado = servicioCalculadora.sacarModulo(NUMERO_5, NUMERO_2);
+        assertEquals(1, resultado);
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre cinco y cero")
+    void sacarModuloDivisionEntreCero() {
+        assertThrows(DivisionEntreCeroException.class,
+                () -> servicioCalculadora.sacarModulo(NUMERO_5, NUMERO_0));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre menos uno y cinco")
+    void sacarModuloNegativoA() {
+        assertThrows(EntradaNoValidaException.class,
+                () -> servicioCalculadora.sacarModulo(NUMERO_NEGATIVO, NUMERO_5));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre cinco y menos uno")
+    void sacarModuloNegativoB() {
+        assertThrows(EntradaNoValidaException.class,
+                () -> servicioCalculadora.sacarModulo(NUMERO_5, NUMERO_NEGATIVO));
     }
 }

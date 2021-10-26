@@ -6,12 +6,15 @@ import com.example.demo.servicio.ServicioCalculadora;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -28,6 +31,7 @@ class ControladorCalculadoraTest {
     final static int NUMERO_5 = 5;
     final static int NUMERO_2 = 2;
     final static int NUMERO_0 = 0;
+    final static int NUMERO_4 = 4;
     final static int NUMERO_NEGATIVO = -1;
 
     @BeforeEach
@@ -52,6 +56,14 @@ class ControladorCalculadoraTest {
         Mockito.when(servicioCalculadora.potenciarNesima(NUMERO_0, NUMERO_0))
                 .thenReturn(1.0);
         Mockito.when(servicioCalculadora.potenciarNesima(NUMERO_0, NUMERO_NEGATIVO))
+                .thenThrow(new EntradaNoValidaException());
+        Mockito.when(servicioCalculadora.sacarInvMultiplicativo(NUMERO_4))
+                .thenReturn(0.25);
+        Mockito.when(servicioCalculadora.sacarInvMultiplicativo(NUMERO_0))
+                .thenThrow(new DivisionEntreCeroException());
+        Mockito.when(servicioCalculadora.sacarRaiz(NUMERO_4))
+                .thenReturn(2.0);
+        Mockito.when(servicioCalculadora.sacarRaiz(NUMERO_NEGATIVO))
                 .thenThrow(new EntradaNoValidaException());
     }
 
@@ -123,6 +135,38 @@ class ControladorCalculadoraTest {
     @DisplayName("Test caso cero potenciado a negativo")
     void potenciarCeroNegativo() throws Exception {
         mockMvc.perform(get("/api/potencia_nesima/" + NUMERO_0 + "/" + NUMERO_NEGATIVO))
+                .andExpect(status().isConflict())
+                .andExpect(content().string(new EntradaNoValidaException().getMessage()));
+    }
+
+    @Test
+    @DisplayName("Test inverso multiplicativo de cuatro")
+    void sacarInvMultiplicativo() throws Exception {
+        mockMvc.perform(get("/api/inv_multiplicativo/" + NUMERO_4))
+                .andExpect(status().isOk())
+                .andExpect(content().string("0.25"));
+    }
+
+    @Test
+    @DisplayName("Test inverso multiplicativo de cero")
+    void sacarInvMultiplicativoCero() throws Exception {
+        mockMvc.perform(get("/api/inv_multiplicativo/" + NUMERO_0))
+                .andExpect(status().isConflict())
+                .andExpect(content().string(new DivisionEntreCeroException().getMessage()));
+    }
+
+    @Test
+    @DisplayName("Test caso raíz positiva")
+    void sacarRaiz() throws Exception {
+        mockMvc.perform(get("/api/raiz/" + NUMERO_4))
+                .andExpect(status().isOk())
+                .andExpect(content().string("2.0"));
+    }
+
+    @Test
+    @DisplayName("Test caso raíz base negativa")
+    void sacarRaizNegativa() throws Exception {
+        mockMvc.perform(get("/api/raiz/" + NUMERO_NEGATIVO))
                 .andExpect(status().isConflict())
                 .andExpect(content().string(new EntradaNoValidaException().getMessage()));
     }

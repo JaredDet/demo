@@ -65,6 +65,14 @@ class ControladorCalculadoraTest {
                 .thenReturn(2.0);
         Mockito.when(servicioCalculadora.sacarRaiz(NUMERO_NEGATIVO))
                 .thenThrow(new EntradaNoValidaException());
+        Mockito.when(servicioCalculadora.sacarModulo(NUMERO_5, NUMERO_2))
+                .thenReturn(1);
+        Mockito.when(servicioCalculadora.sacarModulo(NUMERO_5, NUMERO_0))
+                .thenThrow(new DivisionEntreCeroException());
+        Mockito.when(servicioCalculadora.sacarModulo(NUMERO_NEGATIVO, NUMERO_5))
+                .thenThrow(new EntradaNoValidaException());
+        Mockito.when(servicioCalculadora.sacarModulo(NUMERO_5, NUMERO_NEGATIVO))
+                .thenThrow(new EntradaNoValidaException());
     }
 
     @Test
@@ -167,6 +175,38 @@ class ControladorCalculadoraTest {
     @DisplayName("Test caso raíz base negativa")
     void sacarRaizNegativa() throws Exception {
         mockMvc.perform(get("/api/raiz/" + NUMERO_NEGATIVO))
+                .andExpect(status().isConflict())
+                .andExpect(content().string(new EntradaNoValidaException().getMessage()));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre cinco y dos")
+    void sacarModulo() throws Exception {
+        mockMvc.perform(get("/api/modulo/" + NUMERO_5 + "/" + NUMERO_2))
+                .andExpect(status().isOk())
+                .andExpect(content().string("1.0"));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre cinco y cero")
+    void sacarModuloDivisionEntreCero() throws Exception {
+        mockMvc.perform(get("/api/modulo/" + NUMERO_5 + "/" + NUMERO_0))
+                .andExpect(status().isConflict())
+                .andExpect(content().string(new DivisionEntreCeroException().getMessage()));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre menos uno y cinco")
+    void sacarModuloNegativoA() throws Exception {
+        mockMvc.perform(get("/api/modulo/" + NUMERO_NEGATIVO + "/" + NUMERO_5))
+                .andExpect(status().isConflict())
+                .andExpect(content().string(new EntradaNoValidaException().getMessage()));
+    }
+
+    @Test
+    @DisplayName("Test caso módulo entre cinco y menos uno")
+    void sacarModuloNegativoB() throws Exception {
+        mockMvc.perform(get("/api/modulo/" + NUMERO_5 + "/" + NUMERO_NEGATIVO))
                 .andExpect(status().isConflict())
                 .andExpect(content().string(new EntradaNoValidaException().getMessage()));
     }

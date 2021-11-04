@@ -1,5 +1,6 @@
 package com.example.demo.controlador.controladorPersona;
 
+import com.example.demo.dominio.Persona;
 import com.example.demo.excepcion.PersonaNoEncontradaException;
 import com.example.demo.servicio.servicioPersona.ServicioBorrador;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,11 +27,14 @@ class ControladorBorradorTest {
     private final Long ID = 0L;
     private final Long ID_INEXISTENTE = 100L;
 
+    private final Persona JAVIER = new Persona();
+
     @BeforeEach
     void setUp() {
-        Mockito.when(servicioBorrador.deletePersona(ID))
-                .thenReturn(true);
-        Mockito.when(servicioBorrador.deletePersona(ID_INEXISTENTE))
+        JAVIER.setNombre("Javier");
+        Mockito.when(servicioBorrador.borrar(ID))
+                .thenReturn(JAVIER);
+        Mockito.when(servicioBorrador.borrar(ID_INEXISTENTE))
                 .thenThrow(new PersonaNoEncontradaException(ID_INEXISTENTE));
     }
 

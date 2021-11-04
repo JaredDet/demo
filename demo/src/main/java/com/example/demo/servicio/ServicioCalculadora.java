@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicioCalculadora {
 
-    public Integer sumar(int a, int b) {
+    public double sumar(double a, double b) {
         return a + b;
     }
 
-    public Integer restar(int a, int b) {
+    public double restar(double a, double b) {
         return a - b;
     }
 
-    public Integer multiplicar(int a, int b) {
+    public double multiplicar(double a, double b) {
         return a * b;
     }
 
-    public Integer dividir(int a, int b) {
+    public double dividir(double a, double b) {
 
         if (b == 0) {
             throw new DivisionEntreCeroException();
@@ -27,11 +27,11 @@ public class ServicioCalculadora {
         return a / b;
     }
 
-    public double potenciarCuadrado(int a){
+    public double potenciarCuadrado(double a){
         return Math.pow(a, 2);
     }
 
-    public double potenciarNesima(int a, int b){
+    public double potenciarNesima(double a, int b){
 
         if(a == 0 && b < 0){
             throw new EntradaNoValidaException();
@@ -39,7 +39,7 @@ public class ServicioCalculadora {
         return Math.pow(a, b);
     }
 
-    public double sacarInvMultiplicativo(int a){
+    public double sacarInvMultiplicativo(double a){
 
         if(a == 0){
             throw new DivisionEntreCeroException();
@@ -47,7 +47,7 @@ public class ServicioCalculadora {
         return 1.0/a;
     }
 
-    public double sacarRaiz(int a){
+    public double sacarRaiz(double a){
 
         if(a < 0){
             throw new EntradaNoValidaException();

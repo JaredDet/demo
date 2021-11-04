@@ -1,5 +1,6 @@
 package com.example.demo.controlador.controladorPersona;
 
+import com.example.demo.dominio.Persona;
 import com.example.demo.servicio.servicioPersona.ServicioBorrador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,9 @@ public class ControladorBorrador {
         this.servicioBorrador = servicioBorrador;
     }
 
-    @DeleteMapping("deletepersona/{id}")
-    public Boolean borrarPersonaPorId(@PathVariable long id) {
+    @DeleteMapping(value = "borra/")
+    public Persona borrarPersonaPorId(@RequestParam long id) {
 
-        return servicioBorrador.deletePersona(id);
+        return servicioBorrador.borrar(id);
     }
 }

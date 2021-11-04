@@ -38,15 +38,15 @@ class ControladorCalculadoraTest {
     void setUp() {
 
         Mockito.when(servicioCalculadora.sumar(NUMERO_5, NUMERO_2))
-                .thenReturn(7);
+                .thenReturn(7.0);
         Mockito.when(servicioCalculadora.restar(NUMERO_5, NUMERO_2))
-                .thenReturn(3);
+                .thenReturn(3.0);
         Mockito.when(servicioCalculadora.multiplicar(NUMERO_5, NUMERO_2))
-                .thenReturn(10);
+                .thenReturn(10.0);
         Mockito.when(servicioCalculadora.multiplicar(NUMERO_5, NUMERO_2))
-                .thenReturn(10);
+                .thenReturn(10.0);
         Mockito.when(servicioCalculadora.dividir(NUMERO_5, NUMERO_2))
-                .thenReturn(2);
+                .thenReturn(2.0);
         Mockito.when(servicioCalculadora.dividir(NUMERO_5, NUMERO_0))
                 .thenThrow(new DivisionEntreCeroException());
         Mockito.when(servicioCalculadora.potenciarCuadrado(NUMERO_5))

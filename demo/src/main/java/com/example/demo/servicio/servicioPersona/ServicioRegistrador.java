@@ -5,8 +5,11 @@ import com.example.demo.dto.PersonaDTO;
 import com.example.demo.excepcion.CorreoOcupadoException;
 import com.example.demo.excepcion.NombreOcupadoException;
 import com.example.demo.repositorio.RepositorioPersona;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 @Service
 public class ServicioRegistrador {
@@ -18,7 +21,7 @@ public class ServicioRegistrador {
         this.repositorioPersona = repositorioPersona;
     }
 
-    public Persona registrarPersona(PersonaDTO personaDto) {
+    public Persona registrar(PersonaDTO personaDto) {
 
         if(correoOcupado(personaDto)){
             throw new CorreoOcupadoException(personaDto.getCorreo());
@@ -32,6 +35,7 @@ public class ServicioRegistrador {
         persona.setNombre(personaDto.getNombre());
         persona.setCorreo(personaDto.getCorreo());
         persona.setEdad(personaDto.getEdad());
+        persona.setCumpleanos(personaDto.getCumpleanos());
 
         return repositorioPersona.save(persona);
     }

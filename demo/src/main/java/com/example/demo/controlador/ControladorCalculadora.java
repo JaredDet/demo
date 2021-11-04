@@ -15,48 +15,48 @@ public class ControladorCalculadora {
         this.servicioCalculadora = servicioCalculadora;
     }
 
-    @GetMapping(value = "/suma/{a}/{b}")
-    public int sumar(@PathVariable int a, @PathVariable int b) {
+    @GetMapping(value = "/suma")
+    public double sumar(@RequestParam double a, @RequestParam double b) {
         return servicioCalculadora.sumar(a, b);
     }
 
-    @GetMapping(value = "/resta/{a}/{b}")
-    public int restar(@PathVariable int a, @PathVariable int b) {
+    @GetMapping(value = "/resta")
+    public double restar(@RequestParam double a, @RequestParam double b) {
         return servicioCalculadora.restar(a, b);
     }
 
-    @GetMapping(value = "/multiplicacion/{a}/{b}")
-    public int multiplicar(@PathVariable int a, @PathVariable int b) {
+    @GetMapping(value = "/multiplicacion")
+    public double multiplicar(@RequestParam double a, @RequestParam double b) {
         return servicioCalculadora.multiplicar(a, b);
     }
 
-    @GetMapping(value = "/division/{a}/{b}")
-    public int dividir(@PathVariable int a, @PathVariable int b) {
+    @GetMapping(value = "/division")
+    public double dividir(@RequestParam double a, @RequestParam double b) {
         return servicioCalculadora.dividir(a, b);
     }
 
-    @GetMapping(value = "/potencia_cuadrada/{a}")
-    public double potenciarCuadrado(@PathVariable int a) {
+    @GetMapping(value = "/potencia_cuadrada")
+    public double potenciarCuadrado(@RequestParam double a) {
         return servicioCalculadora.potenciarCuadrado(a);
     }
 
-    @GetMapping(value = "/potencia_nesima/{a}/{b}")
-    public double potenciarNesima(@PathVariable int a, @PathVariable int b) {
+    @GetMapping(value = "/potencia_nesima")
+    public double potenciarNesima(@RequestParam double a, @RequestParam int b) {
         return servicioCalculadora.potenciarNesima(a, b);
     }
 
-    @GetMapping(value = "/inv_multiplicativo/{a}")
-    public double sacarInvMultiplicativo(@PathVariable int a) {
+    @GetMapping(value = "/inv_multiplicativo")
+    public double sacarInvMultiplicativo(@RequestParam double a) {
         return servicioCalculadora.sacarInvMultiplicativo(a);
     }
 
-    @GetMapping(value = "/raiz/{a}")
-    public double sacarRaiz(@PathVariable int a) {
+    @GetMapping(value = "/raiz")
+    public double sacarRaiz(@RequestParam double a) {
         return servicioCalculadora.sacarRaiz(a);
     }
 
-    @GetMapping(value = "/modulo/{a}/{b}")
-    public double sacarModulo(@PathVariable int a, @PathVariable int b) {
+    @GetMapping(value = "/modulo")
+    public int sacarModulo(@RequestParam int a, @RequestParam int b) {
         return servicioCalculadora.sacarModulo(a, b);
     }
 }

@@ -18,21 +18,21 @@ public class ServicioBuscador {
         this.repositorioPersona = repositorioPersona;
     }
 
-    public List<Persona> getPersonasMayoresDe(int edad){
+    public List<Persona> buscarMayoresQue(int edad){
         return repositorioPersona.findByEdadGreaterThan(edad);
     }
 
-    public Persona getPersonaPorID(long id){
+    public Persona buscarID(long id){
         return repositorioPersona.findById(id)
                 .orElseThrow(() -> new PersonaNoEncontradaException(id));
     }
 
-    public Persona getPersonaPorCorreo(String correo){
+    public Persona buscarCorreo(String correo){
         return repositorioPersona.findByCorreo(correo)
                 .orElseThrow(() -> new PersonaNoEncontradaException(correo));
     }
 
-    public List<Persona> getTodos(){
+    public List<Persona> buscarTodos(){
         return repositorioPersona.findAll();
     }
 }

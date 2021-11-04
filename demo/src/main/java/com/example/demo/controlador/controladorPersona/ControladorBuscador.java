@@ -18,28 +18,28 @@ public class ControladorBuscador {
         this.servicioBuscador = servicioBuscador;
     }
 
-    @GetMapping("filtrarusuariosporedad/{edad}")
-    public List<Persona> getPersonasMayoresDe(@PathVariable int edad) {
+    @GetMapping(value = "filtroEdad/")
+    public List<Persona> getPersonasMayoresDe(@RequestParam int edad) {
 
-        return servicioBuscador.getPersonasMayoresDe(edad);
+        return servicioBuscador.buscarMayoresQue(edad);
     }
 
-    @GetMapping("getpersonaporid/{id}")
-    public Persona getPersonaPorId(@PathVariable long id) {
+    @GetMapping(value = "buscaID/")
+    public Persona getPersonaPorId(@RequestParam long id) {
 
-        return servicioBuscador.getPersonaPorID(id);
+        return servicioBuscador.buscarID(id);
     }
 
-    @GetMapping("getpersonaporcorreo/{correo}")
-    public Persona getPersonaPorCorreo(@PathVariable String correo) {
+    @GetMapping(value = "buscaCorreo/")
+    public Persona getPersonaPorCorreo(@RequestParam String correo) {
 
-        return servicioBuscador.getPersonaPorCorreo(correo);
+        return servicioBuscador.buscarCorreo(correo);
     }
 
-    @GetMapping("gettodos")
+    @GetMapping(value = "todos/")
     public List<Persona> getTodos() {
 
-        return servicioBuscador.getTodos();
+        return servicioBuscador.buscarTodos();
 
     }
 }

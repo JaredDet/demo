@@ -1,5 +1,6 @@
 package com.example.demo.servicio.servicioPersona;
 
+import com.example.demo.dominio.Persona;
 import com.example.demo.repositorio.RepositorioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ public class ServicioBorrador {
         this.servicioBuscador = servicioBuscador;
     }
 
-    public Boolean deletePersona(Long id) {
+    public Persona borrar(Long id) {
 
-        var persona = servicioBuscador.getPersonaPorID(id);
+        var persona = servicioBuscador.buscarID(id);
         repositorioPersona.delete(persona);
-        return true;
+        return persona;
     }
 }

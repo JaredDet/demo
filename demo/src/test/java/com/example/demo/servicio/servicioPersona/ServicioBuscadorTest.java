@@ -24,6 +24,7 @@ class ServicioBuscadorTest {
     @MockBean
     RepositorioPersona repositorioPersona;
 
+
     final static String NOMBRE_CERO = "Ninoska";
     final static String CORREO_CERO = "n.diaz@ufromail.cl";
     final static Integer EDAD_CERO = 20;
@@ -79,47 +80,47 @@ class ServicioBuscadorTest {
     @Test
     void getPersonaPorID() {
 
-        var resultado = servicioBuscador.getPersonaPorID(ID);
+        var resultado = servicioBuscador.buscarID(ID);
         assertEquals(persona, resultado);
     }
 
     @Test
     void getPersonaPorIDNoEncontrado() {
 
-        assertThrows(PersonaNoEncontradaException.class, () -> servicioBuscador.getPersonaPorID(ID_INEXISTENTE));
+        assertThrows(PersonaNoEncontradaException.class, () -> servicioBuscador.buscarID(ID_INEXISTENTE));
     }
 
     @Test
     void getPersonaPorCorreo() {
 
-        var resultado = servicioBuscador.getPersonaPorCorreo(CORREO_CERO);
+        var resultado = servicioBuscador.buscarCorreo(CORREO_CERO);
         assertEquals(persona, resultado);
     }
 
     @Test
     void getPersonaPorCorreoNoEncontrado() {
 
-        assertThrows(PersonaNoEncontradaException.class, () -> servicioBuscador.getPersonaPorCorreo(CORREO_INEXISTENTE));
+        assertThrows(PersonaNoEncontradaException.class, () -> servicioBuscador.buscarCorreo(CORREO_INEXISTENTE));
     }
 
     @Test
     void getTodos() {
 
-        var resultado = servicioBuscador.getTodos();
+        var resultado = servicioBuscador.buscarTodos();
         assertEquals(personaLista, resultado);
     }
 
     @Test
     void getPersonasMayoresDe() {
 
-        var resultado = servicioBuscador.getPersonasMayoresDe(10);
+        var resultado = servicioBuscador.buscarMayoresQue(10);
         assertEquals(personaLista, resultado);
     }
 
     @Test
     void getPersonasMayoresDeListaVacia() {
 
-        var resultado = servicioBuscador.getPersonasMayoresDe(200);
+        var resultado = servicioBuscador.buscarMayoresQue(200);
         assertTrue(resultado.isEmpty());
     }
 }

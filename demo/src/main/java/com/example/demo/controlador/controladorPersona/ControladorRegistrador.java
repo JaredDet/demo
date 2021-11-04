@@ -5,7 +5,11 @@ import com.example.demo.dto.PersonaDTO;
 import com.example.demo.servicio.servicioPersona.ServicioRegistrador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -20,10 +24,10 @@ public class ControladorRegistrador {
     }
 
 
-    @PostMapping("registrarpersona/persona")
+    @PostMapping(value = "registrarse/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Persona registrarPersona(@RequestBody PersonaDTO personaDto) {
+    public Persona registrarse(@Valid @RequestBody PersonaDTO personaDto, BindingResult validacion) {
 
-        return servicioRegistrador.registrarPersona(personaDto);
+        return servicioRegistrador.registrar(personaDto);
     }
 }

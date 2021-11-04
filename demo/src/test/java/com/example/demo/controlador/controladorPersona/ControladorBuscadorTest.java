@@ -62,19 +62,19 @@ class ControladorBuscadorTest {
         persona1.setCorreo(CORREO_UNO);
         persona1.setEdad(EDAD_UNO);
 
-        Mockito.when(servicioBuscador.getPersonaPorID(ID))
+        Mockito.when(servicioBuscador.buscarID(ID))
                 .thenReturn(persona);
-        Mockito.when(servicioBuscador.getPersonaPorID(ID_INEXISTENTE))
+        Mockito.when(servicioBuscador.buscarID(ID_INEXISTENTE))
                 .thenThrow(new PersonaNoEncontradaException(ID_INEXISTENTE));
-        Mockito.when(servicioBuscador.getPersonaPorCorreo(CORREO_CERO))
+        Mockito.when(servicioBuscador.buscarCorreo(CORREO_CERO))
                 .thenReturn(persona);
-        Mockito.when(servicioBuscador.getPersonaPorCorreo(CORREO_INEXISTENTE))
+        Mockito.when(servicioBuscador.buscarCorreo(CORREO_INEXISTENTE))
                 .thenThrow(new PersonaNoEncontradaException(CORREO_INEXISTENTE));
-        Mockito.when(servicioBuscador.getTodos())
+        Mockito.when(servicioBuscador.buscarTodos())
                 .thenReturn(List.of(persona, persona1));
-        Mockito.when(servicioBuscador.getPersonasMayoresDe(10))
+        Mockito.when(servicioBuscador.buscarMayoresQue(10))
                 .thenReturn(List.of(persona, persona1));
-        Mockito.when(servicioBuscador.getPersonasMayoresDe(200))
+        Mockito.when(servicioBuscador.buscarMayoresQue(200))
                 .thenReturn(Collections.emptyList());
 
         jsonpersona_cero = mapper.writeValueAsString(persona);
